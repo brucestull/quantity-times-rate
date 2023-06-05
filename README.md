@@ -1,1 +1,1 @@
-# quantity-times-rate
+# Quantity Times Rate
