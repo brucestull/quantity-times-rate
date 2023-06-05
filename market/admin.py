@@ -26,6 +26,8 @@ class ConsumableAdmin(admin.ModelAdmin):
 class ConsumableInstanceAdmin(admin.ModelAdmin):
     list_display = (
         "consumables",
+        # This is a method defined in this class. We can see the return
+        # value of this method in the admin panel list view.
         "current_cost_of_consumables",
         "quantity",
     )
