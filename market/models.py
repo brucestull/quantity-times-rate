@@ -22,18 +22,10 @@ class Consumable(models.Model):
 
     def __str__(self):
         """
-        String representation of `Category`.
+        String representation of `Consumable`.
         """
-        return (
-            self.name
-            + " ("
-            + self.unit
-            + ")"
-            + " - $"
-            + str(self.cost_per_unit)
-            + "/"
-            + self.unit
-        )
+        # Remember that f-string interpolation is our friend.
+        return f"{self.name} (${self.cost_per_unit}/{self.unit})"
 
     class Meta:
         verbose_name_plural = "Consumables"
@@ -71,12 +63,5 @@ class ConsumableInstance(models.Model):
         """
         String representation of `ConsumableInstance`.
         """
-        return (
-            str(self.consumables)
-            + " - "
-            + str(self.quantity)
-            + " "
-            + self.consumables.unit
-            + " - $"
-            + str(self.cost)
-        )
+        # Remember that f-string interpolation is our friend.
+        return f"{self.consumables.name} (${self.cost} : {self.quantity} {self.consumables.unit})"
