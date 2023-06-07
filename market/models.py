@@ -3,7 +3,14 @@ from django.db import models
 
 class Consumable(models.Model):
     """
-    Model for a `Consumable` item.
+    Model for a `Consumable` item. It is used to keep track of the consumables
+    that are used in the market. It will be used to store the current cost
+    of the consumables used in the `Market` application.
+
+    Attributes:
+        name (CharField): The name of the consumable.
+        unit (CharField): The unit of the consumable. (e.g. kg, g, mg, l, ml, etc.)
+        cost_per_unit (DecimalField): The cost per unit of the consumable.
     """
 
     name = models.CharField(
@@ -32,10 +39,22 @@ class Consumable(models.Model):
 
 
 class ConsumableInstance(models.Model):
+    """
+    This model represents an instance of use of a `Consumable`. It is used
+    so that the cost of the consumable at the time of creation is recorded.
+
+    Attributes:
+        consumables (ForeignKey): The consumable that was used.
+        quantity (DecimalField): The quantity of the consumable that was
+        used.
+        cost (DecimalField): The cost of the consumable at the time of
+        creation.
+    """
+
     consumables = models.ForeignKey(
         Consumable,
         on_delete=models.SET_NULL,
-        null=True,
+        null=True, # May keep or remove this in the future.
     )
     quantity = models.DecimalField(
         help_text="The quantity of the consumable.",
@@ -61,7 +80,8 @@ class ConsumableInstance(models.Model):
 
     def __str__(self):
         """
-        String representation of `ConsumableInstance`.
+        String representation of `ConsumableInstance`. It includes the name,
+        unit, cost, and quantity of the consumable.
         """
         # Remember that f-string interpolation is our friend.
         return (
