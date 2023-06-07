@@ -5,7 +5,7 @@ class Consumable(models.Model):
     """
     Model for a `Consumable` item. It is used to keep track of the consumables
     that are used in the market. It will be used to store the current cost
-    of the consumables used in the `Market` application.
+    of the consumable used in the `Market` application.
 
     Attributes:
         name (CharField): The name of the consumable.
@@ -44,14 +44,14 @@ class ConsumableInstance(models.Model):
     so that the cost of the consumable at the time of creation is recorded.
 
     Attributes:
-        consumables (ForeignKey): The consumable that was used.
+        consumable (ForeignKey): The consumable that was used.
         quantity (DecimalField): The quantity of the consumable that was
         used.
         cost (DecimalField): The cost of the consumable at the time of
         creation.
     """
 
-    consumables = models.ForeignKey(
+    consumable = models.ForeignKey(
         Consumable,
         on_delete=models.SET_NULL,
         null=True, # May keep or remove this in the future.
@@ -68,14 +68,14 @@ class ConsumableInstance(models.Model):
         blank=True,
     )
 
-    def get_current_cost_of_consumables(self):
+    def get_current_cost_of_consumable(self):
         """
         Returns the current cost of the consumable.
         """
-        return self.consumables.cost_per_unit * self.quantity
+        return self.consumable.cost_per_unit * self.quantity
 
     def save(self, *args, **kwargs):
-        self.cost = self.get_current_cost_of_consumables()
+        self.cost = self.get_current_cost_of_consumable()
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -85,6 +85,6 @@ class ConsumableInstance(models.Model):
         """
         # Remember that f-string interpolation is our friend.
         return (
-            f"{self.consumables.name} (${self.cost} : "
-            f"{self.quantity} {self.consumables.unit})"
+            f"{self.consumable.name} (${self.cost} : "
+            f"{self.quantity} {self.consumable.unit})"
         )

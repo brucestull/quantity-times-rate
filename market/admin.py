@@ -25,15 +25,16 @@ class ConsumableAdmin(admin.ModelAdmin):
 @admin.register(ConsumableInstance)
 class ConsumableInstanceAdmin(admin.ModelAdmin):
     list_display = (
-        "consumables",
+        "consumable",
         # This is a method defined in this class. We can see the return
         # value of this method in the admin panel list view.
-        "current_cost_of_consumables",
+        "cost_of_consumable_instance",
         "quantity",
     )
     list_filter = (
-        "consumables",
+        "consumable",
         "quantity",
+        # "cost",
     )
     search_fields = (
         # "consumables", # This is a ForeignKey, so it is not searchable.
@@ -43,5 +44,5 @@ class ConsumableInstanceAdmin(admin.ModelAdmin):
         "cost",
     )
 
-    def current_cost_of_consumables(self, obj):
-        return obj.get_current_cost_of_consumables()
+    def cost_of_consumable_instance(self, obj):
+        return obj.get_current_cost_of_consumable()
