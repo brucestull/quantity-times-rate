@@ -11,7 +11,7 @@ class Consumable(models.Model):
         max_length=30,
     )
     unit = models.CharField(
-        help_text="The unit of the consumable. (e.g. kg, g, l, ml, etc.)",
+        help_text="The unit of the consumable. (e.g. kg, g, mg, l, ml, etc.)",
         max_length=10,
     )
     cost_per_unit = models.DecimalField(
