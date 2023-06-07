@@ -64,4 +64,7 @@ class ConsumableInstance(models.Model):
         String representation of `ConsumableInstance`.
         """
         # Remember that f-string interpolation is our friend.
-        return f"{self.consumables.name} (${self.cost} : {self.quantity} {self.consumables.unit})"
+        return (
+            f"{self.consumables.name} (${self.cost} : "
+            f"{self.quantity} {self.consumables.unit})"
+        )
