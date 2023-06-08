@@ -41,7 +41,8 @@ class Consumable(models.Model):
 class ConsumableInstance(models.Model):
     """
     This model represents an instance of use of a `Consumable`. It is used
-    so that the cost of the consumable at the time of creation is recorded.
+    to store the cost of the consumable at the time of creation as well
+    as the quantity of the `Consumable` used in the instance.
 
     Attributes:
         consumable (ForeignKey): The consumable that was used.
@@ -85,6 +86,6 @@ class ConsumableInstance(models.Model):
         """
         # Remember that f-string interpolation is our friend.
         return (
-            f"{self.consumable.name} (${self.cost} : "
+            f"{self.consumable.name} (${self.cost} | "
             f"{self.quantity} {self.consumable.unit})"
         )

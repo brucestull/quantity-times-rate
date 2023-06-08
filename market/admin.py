@@ -25,24 +25,20 @@ class ConsumableAdmin(admin.ModelAdmin):
 @admin.register(ConsumableInstance)
 class ConsumableInstanceAdmin(admin.ModelAdmin):
     list_display = (
+        # Currently showing the `__str__` method of the `Consumable` model. This may change to just return `consumable.name` in the future.
         "consumable",
-        # This is a method defined in this class. We can see the return
-        # value of this method in the admin panel list view.
-        "cost_of_consumable_instance",
+        "cost",
         "quantity",
     )
     list_filter = (
         "consumable",
+        "cost",
         "quantity",
-        # "cost",
     )
     search_fields = (
-        # "consumables", # This is a ForeignKey, so it is not searchable.
+        # "consumable", # This is a ForeignKey, so it is not searchable.
         "quantity",
     )
     readonly_fields = (
         "cost",
     )
-
-    def cost_of_consumable_instance(self, obj):
-        return obj.get_current_cost_of_consumable()
