@@ -11,7 +11,8 @@
     * `cost_per_unit`
 
 * `ConsumableInstance`:
-    * `consumables`
+    * `consumable`
     * `quantity`
     * `cost`
-    * `get_current_cost_of_consumables`
+    * `get_current_cost_of_consumable()`
+    * `save()`
